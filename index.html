@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -31,21 +31,22 @@ body{background:#fff!important}
 .letter-preview{background:#fff!important;padding:0!important;display:block!important;min-height:auto!important;overflow:visible!important}
 .letter-preview .page{box-shadow:none!important;width:100%!important}
 }
-.letter-content{padding:38mm 25mm 20mm;font-family:"SimSun","宋体",serif;color:#1a1a1a;page-break-after:always}
-.letter-content .seq-line{font-family:"黑体","SimHei",sans-serif;font-size:12pt;margin-bottom:18px}
-.letter-content .title{text-align:center;font-size:15pt;font-weight:bold;font-family:"宋体","SimSun",serif;margin-bottom:10px;letter-spacing:1px;line-height:1.6}
-.letter-content .body-line{font-size:14pt;line-height:2;margin-bottom:6px;text-align:center}
-.letter-content .body-line .field{display:inline-block;border-bottom:1px solid #333;min-width:60px;text-align:center;padding:0 4px;font-weight:bold}
+.letter-content{padding:25.4mm 25mm 20mm;font-family:"SimSun","宋体",serif;color:#1a1a1a;page-break-after:always}
+.letter-content .seq-line{font-family:"黑体","SimHei",sans-serif;font-size:11pt;margin-bottom:18px}
+.letter-content .title{text-align:center;font-size:18pt;font-family:"华文中宋","STZhongsong",serif;margin-bottom:calc(20px + 0.5em);letter-spacing:1px;line-height:1.6}
+.letter-content .body-line{font-size:15pt;line-height:23pt;margin-bottom:0.5em;text-align:center;font-family:"楷体","KaiTi",serif}
+.letter-content .body-line .field{display:inline-block;border-bottom:1px solid #333;min-width:60px;text-align:center;padding:0 4px;font-weight:bold;font-family:"楷体","KaiTi","黑体","SimHei","Microsoft YaHei","微软雅黑",sans-serif}
 .letter-content .body-line .field-school{min-width:100px}
 .letter-content .body-line .field-type{min-width:60px}
-.letter-content .normal-text{font-size:14pt;line-height:2;text-indent:2em;margin-bottom:6px}
-.letter-content .bold{font-size:14pt;line-height:2;font-weight:bold}
-.letter-content .reminder{font-size:14pt;line-height:1.8;margin-bottom:2px}
-.letter-content .footer-right{text-align:right;font-size:14pt;margin-top:20px}
+.letter-content .normal-text{font-size:15pt;line-height:23pt;text-indent:2em;margin-bottom:6px;margin-top:0.5em}
+.letter-content .bold{font-size:15pt;line-height:23pt;font-weight:bold!important;font-family:"楷体","KaiTi","黑体","SimHei","Microsoft YaHei","微软雅黑",sans-serif}
+b{font-family:"黑体","SimHei","Microsoft YaHei","微软雅黑",sans-serif;font-weight:normal}
+.letter-content .reminder{font-size:15pt;line-height:23pt;margin-bottom:2px;text-indent:2em}
+.letter-content .footer-right{text-align:right;font-size:15pt;margin-top:20px}
 .letter-content .footer-right .school-name{margin-bottom:6px}
 .letter-content .logo-area{text-align:center;margin:6px 0}
-.letter-content .logo-area img{max-width:100px}
-.letter-content .note-text{font-size:14pt;font-weight:bold;margin-top:10px}
+.letter-content .logo-area img{max-width:270px}
+.letter-content .note-text{font-size:14pt;font-weight:bold;margin-top:10px;font-family:"楷体","KaiTi","黑体","SimHei","Microsoft YaHei","微软雅黑",sans-serif;margin-bottom:1em}
 </style>
 </head>
 <body>
@@ -102,10 +103,10 @@ document.getElementById("printAllBtn").disabled=false;
 document.getElementById("endNum").value=students.length;
 document.getElementById("endNum").max=students.length;
 var sel=document.getElementById("studentSelect");
-sel.innerHTML=students.map(function(s,i){return"<option value='"+i+"'>"+s.编号+" - "+s.姓名+"（"+s.学校+"）<\/option>"}).join("");
+sel.innerHTML=students.map(function(s,i){return"<option value='"+i+"'>"+s.编号+" - "+s.姓名+"（"+s.学校+"）</option>"}).join("");
 currentIdx=0;sel.value="0";renderPreview();updateNav();
 }else{
-document.getElementById("previewArea").innerHTML="<div style='text-align:center;color:#999;margin-top:100px'><p style='font-size:40px'><\/p><p>未找到数据，请检查 Excel 列名<\/p><\/div>";
+document.getElementById("previewArea").innerHTML="<div style='text-align:center;color:#999;margin-top:100px'><p style='font-size:40px'></p><p>未找到数据，请检查 Excel 列名</p></div>";
 }
 };
 reader.readAsArrayBuffer(file);
@@ -114,22 +115,22 @@ document.getElementById("studentSelect").addEventListener("change",function(){cu
 document.getElementById("printAllBtn").addEventListener("click",printAll);
 function navigate(dir){var n=currentIdx+dir;if(n<0||n>=students.length)return;currentIdx=n;document.getElementById("studentSelect").value=n;renderPreview();updateNav();}
 function updateNav(){document.getElementById("prevBtn").disabled=currentIdx<=0;document.getElementById("nextBtn").disabled=currentIdx>=students.length-1;document.getElementById("pageInfo").textContent=(currentIdx+1)+" / "+students.length;}
-function renderPreview(){if(!students.length)return;document.getElementById("previewArea").innerHTML="<div class='page'>"+buildContent(students[currentIdx])+"<\/div>";}
+function renderPreview(){if(!students.length)return;document.getElementById("previewArea").innerHTML="<div class='page'>"+buildContent(students[currentIdx])+"</div>";}
 document.getElementById("prevBtn").addEventListener("click",function(){navigate(-1);});
 document.getElementById("nextBtn").addEventListener("click",function(){navigate(1);});
 function buildContent(s){return"<div class='letter-content'>"+
 "<div class='seq-line'>序号 "+s.编号+"<\/div>"+
-"<div class='title'>2026年"+s.学校+"预备年级新生入学通知书<\/div>"+
+"<div class='title'>2026年上海市金卫中学预备年级新生入学通知书<\/div>"+
 "<div class='body-line'><span class='field field-school'>"+s.学校+"<\/span>&nbsp;&nbsp;&nbsp;<span class='field field-name'>"+s.姓名+"<\/span>&nbsp;同学&nbsp;&nbsp;&nbsp;类型&nbsp;<span class='field field-type'>"+s.类型+"<\/span><\/div>"+
-"<div class='normal-text'>祝贺你升入初中学习，欢迎你来金卫中学就读。我校定于7月4日（星期六）&nbsp;&nbsp;"+s.报到时间+"&nbsp;&nbsp;&nbsp;&nbsp;办理预备新生入学报到手续，请你务必带好相关材料，准时来金卫中学报到。<\/div>"+
-"<div class='normal-text'><span class='bold'>报到地点：<\/span>金卫中学（海帆路981号）1号楼3楼1307会议室。<\/div>"+
-"<div class='normal-text'><span class='bold'>学生入学需携带的材料：<\/span>本入学通知书<\/div>"+
-"<div class='bold' style='font-size:14pt;margin-bottom:4px'>友情提醒：<\/div>"+
+"<div class='normal-text'>祝贺你升入初中学习，欢迎你来上海市金卫中学就读。我校定于7月4日（星期六）"+s.报到时间+"办理预备新生入学报到手续，请你务必带好相关材料，准时来上海市金卫中学报到。<\/div>"+
+"<div class='normal-text'><b>报到地点：<\/b>金卫中学（海帆路981号）1号楼3楼1307会议室<\/div>"+
+"<div class='normal-text'><b>学生入学需携带的材料：<\/b>本入学通知书<\/div>"+
+"<div class='normal-text'><b>友情提醒：<\/b><\/div>"+
 "<div class='reminder'>1．若父母一方持有《上海市居住证》，且积分已达标的非本市户籍学生，请提交积分通知单复印件1份。<\/div>"+
 "<div class='reminder'>2．若父母一方是上海市户籍的非本市户籍学生，请携带好上海市户籍父母一方的户口本原件及复印件1份、结婚登记证复印件1份。<\/div>"+
-"<div class='reminder'>3．请扫码填写“上海市金卫中学学生校服征订意向单”。<\/div>"+
+"<div class='reminder'>3．请扫码填写\u201C上海市金卫中学学生校服征订意向单\u201D。<\/div>"+
 "<div class='logo-area'><img src='outputs/school_logo.png' alt='校徽'><\/div>"+
-"<div class='note-text'>备注：本通知也可在“上海市金卫中学”公众号上查询。<\/div>"+
+"<div class='note-text'>备注：本通知也可在\u201C上海市金卫中学\u201D公众号上查询。<\/div>"+
 "<div style='margin-top:8px'><\/div>"+
 "<div class='footer-right'><div class='school-name'>上海市金卫中学<\/div><div>2026年6月<\/div><\/div>"+
 "<\/div>";}
@@ -139,11 +140,54 @@ var si=parseInt(document.getElementById("startNum").value)-1;
 var ei=parseInt(document.getElementById("endNum").value);
 if(si<0||ei>students.length||si>=ei)return;
 var w=window.open("","_blank","width=900,height=700");
-var h="<!DOCTYPE html>"+"<html><head><meta charset=\"UTF-8\"><title>录取通知书打印<\/title><style>"+"@page{size:A4;margin:0}body{margin:0;padding:0;font-family:\"SimSun\",\"宋体\",serif;color:#1a1a1a}"+".letter-content{padding:38mm 25mm 20mm;page-break-after:always}.letter-content:last-child{page-break-after:auto}"+".letter-content .seq-line{font-family:\"黑体\",\"SimHei\",sans-serif;font-size:12pt;margin-bottom:18px}"+".letter-content .title{text-align:center;font-size:15pt;font-weight:bold;font-family:\"宋体\",\"SimSun\",serif;margin-bottom:10px;letter-spacing:1px;line-height:1.6}"+".letter-content .body-line{font-size:14pt;line-height:2;margin-bottom:6px;text-align:center}"+".letter-content .body-line .field{display:inline-block;border-bottom:1px solid #333;min-width:60px;text-align:center;padding:0 4px;font-weight:bold}"+".letter-content .body-line .field-school{min-width:100px}"+".letter-content .body-line .field-type{min-width:60px}"+".letter-content .normal-text{font-size:14pt;line-height:2;text-indent:2em;margin-bottom:6px}"+".letter-content .bold{font-size:14pt;line-height:2;font-weight:bold}"+".letter-content .reminder{font-size:14pt;line-height:1.8;margin-bottom:2px}"+".letter-content .footer-right{text-align:right;font-size:14pt;margin-top:20px}"+".letter-content .footer-right .school-name{margin-bottom:6px}"+".letter-content .logo-area{text-align:center;margin:6px 0}"+".letter-content .logo-area img{max-width:100px}"+".letter-content .note-text{font-size:14pt;font-weight:bold;margin-top:10px}"+"<\/style><\/head><body>";
+var h="<!DOCTYPE html>"+"<html><head><meta charset=\"UTF-8\"><title>录取通知书打印</title><style>"+
+"@page{size:A4;margin:0}body{margin:0;padding:0;font-family:'SimSun','宋体',serif;color:#1a1a1a}"+
+".letter-content{padding:25.4mm 25mm 20mm;page-break-after:always}.letter-content:last-child{page-break-after:auto}"+
+".letter-content .seq-line{font-family:'楷体','KaiTi','黑体','SimHei','Microsoft YaHei','微软雅黑',sans-serif;font-size:11pt;margin-bottom:18px}"+
+".letter-content .title{text-align:center;font-size:18pt;font-family:\"华文中宋\",\"STZhongsong\",serif;margin-bottom:calc(20px + 0.5em);letter-spacing:1px;line-height:1.6}"+
+".letter-content .body-line{font-size:15pt;line-height:23pt;margin-bottom:0.5em;text-align:center;font-family:'楷体','KaiTi',serif}"+
+".letter-content .body-line .field{display:inline-block;border-bottom:1px solid #333;min-width:60px;text-align:center;padding:0 4px;font-weight:bold;font-family:'楷体','KaiTi','黑体','SimHei','Microsoft YaHei','微软雅黑',sans-serif}"+
+".letter-content .body-line .field-school{min-width:100px}"+
+".letter-content .body-line .field-type{min-width:60px}"+
+".letter-content .normal-text{font-size:15pt;line-height:23pt;text-indent:2em;margin-bottom:6px;margin-top:0.5em}"+
+".letter-content .bold{font-size:15pt;line-height:23pt;font-weight:bold!important;font-family:'楷体','KaiTi','黑体','SimHei','Microsoft YaHei','微软雅黑',sans-serif}"+
+"b{font-family:'黑体','SimHei','Microsoft YaHei','微软雅黑',sans-serif;font-weight:normal}"+
+".letter-content .reminder{font-size:15pt;line-height:23pt;margin-bottom:2px;text-indent:2em}"+
+".letter-content .footer-right{text-align:right;font-size:15pt;margin-top:20px}"+
+".letter-content .footer-right .school-name{margin-bottom:6px}"+
+".letter-content .logo-area{text-align:center;margin:6px 0}"+
+".letter-content .logo-area img{max-width:270px}"+
+".letter-content .note-text{font-size:14pt;font-weight:bold;margin-top:10px;font-family:'楷体','KaiTi','黑体','SimHei','Microsoft YaHei','微软雅黑',sans-serif;margin-bottom:1em}"+
+"<\/style><\/head><body>";
 for(var i=si;i<ei;i++){h+=buildContent(students[i]);}
-h+="<\/body><\/html>";w.document.write(h);w.document.close();
+h+="</body></html>";w.document.write(h);w.document.close();
 setTimeout(function(){w.focus();w.print();},300);
 }
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
